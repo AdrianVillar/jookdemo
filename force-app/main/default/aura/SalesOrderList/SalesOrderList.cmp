@@ -1,0 +1,55 @@
+<aura:component controller="SalesOrdersController" implements="flexipage:availableForRecordHome,force:hasRecordId"
+                access="global" >
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="wrapper" type="Object" />
+    <aura:attribute name="size" type="String" default="10" required="true"/>
+    <aura:attribute name="columns" type="List"/>
+
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <lightning:card variant="Narrow" title="Top 10 Sales Orders" iconName="standard:orders" >
+        <p class="slds-p-horizontal_small">
+            <!--TODO IF-->
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+              <thead>
+                <tr class="slds-line-height_reset">
+                  <th class="slds-text-title_caps" scope="col">
+                    <div class="slds-truncate" title="Sales Order">Sales Order</div>
+                  </th>
+                  <th class="slds-text-title_caps" scope="col">
+                    <div class="slds-truncate" title="Type">Type</div>
+                  </th>
+                  <!--th class="slds-text-title_caps" scope="col">
+                    <div class="slds-truncate" title="Date">Date</div>
+                  </th-->
+                  <th class="slds-text-title_caps" scope="col">
+                    <div class="slds-truncate" title="Amount">Amount</div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <aura:iteration items="{!v.wrapper}" var="so">
+                    <tr class="slds-hint-parent">
+                      <th data-label="Sales Order" scope="row">
+                        <div class="slds-truncate" title="{!so.SalesOrder}">{!so.SalesOrder}</div>
+                      </th>
+                      <td data-label="Account Name">
+                        <div class="slds-truncate" title="{!so.SalesOrderType}">{!so.SalesOrderType}</div>
+                      </td>
+                      <!--td data-label="Close Date">
+                        <div class="slds-truncate" title="{!so.SalesOrderDate}">{!so.SalesOrderDate}</div>
+                      </td-->
+                      <td data-label="Prospecting">
+                        <div class="slds-truncate" title="{!so.TotalNetAmount}">{!so.TotalNetAmount}</div>
+                      </td>
+                    </tr>
+                </aura:iteration>
+              </tbody>
+            </table>
+
+        </p>
+    </lightning:card>
+
+
+</aura:component>
+
